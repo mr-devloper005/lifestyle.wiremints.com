@@ -15,14 +15,14 @@ export const visualPresets = {
     mood: 'calm magazine authority',
     fontDirection: 'serif headlines with quiet sans body',
     colors: {
-      background: '#f7f4ef',
+      background: '#ffffff',
       foreground: '#111111',
       muted: '#66615b',
       primary: '#111111',
-      accent: '#c92f2f',
+      accent: '#ffe66d',
       surface: '#ffffff',
     },
-    shape: 'sharp newsroom modules with black rules and red feature bands',
+    shape: 'black agency modules, yellow action accents, and media-ready content cards',
   },
   'luxury-atelier': {
     label: 'Luxury Atelier',

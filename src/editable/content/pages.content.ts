@@ -3,15 +3,15 @@ import { slot4BrandConfig } from '@/editable/theme/brand.config'
 export const pagesContent = {
   home: {
     metadata: {
-      title: 'News, media, and public updates',
-      description: 'Explore announcements, newsroom updates, media coverage, and dynamic categories through a clean distribution experience.',
-      openGraphTitle: 'News, media, and public updates',
+      title: 'Media distribution and public updates',
+      description: 'Explore announcements, media coverage, brand updates, and dynamic categories through a clean distribution experience.',
+      openGraphTitle: 'Media distribution and public updates',
       openGraphDescription: 'Discover articles, visual posts, and connected content through a calmer reading-first experience.',
       keywords: ['story platform', 'article site', 'visual content', 'content discovery'],
     },
     hero: {
-      badge: 'Latest media and newsroom updates',
-      title: ['A flexible home for', 'news, media, and public updates.'],
+      badge: 'Latest media and public updates',
+      title: ['A flexible home for', 'announcements, media, and brand visibility.'],
       description: 'Browse distributed media, company announcements, press coverage, and public updates across categories managed directly from the master panel.',
       primaryCta: { label: 'Browse latest updates', href: '/updates' },
       secondaryCta: { label: 'Open News Media', href: '/updates?category=news-media' },
@@ -54,7 +54,7 @@ export const pagesContent = {
   about: {
     badge: 'Our Story',
     title: 'A calmer, clearer way to explore content.',
-    description: `${slot4BrandConfig.siteName} is built to make long-form reading, visual discovery, and supporting resources feel like one unified experience.`,
+    description: `${slot4BrandConfig.siteName} is built to make media distribution, public updates, visual discovery, and supporting resources feel like one unified experience.`,
     paragraphs: [
       'Instead of splitting everything into disconnected pages, the platform keeps related content easy to move through and easy to understand.',
       'Whether someone starts with an article, listing, image post, or resource page, they can continue exploring without losing context.',
