@@ -46,28 +46,27 @@ const matches = (post: SitePost, query: string, category: string, task: string) 
     .some((value) => compactText(value).includes(query))
 }
 
-function SearchResultCard({ post, index }: { post: SitePost; index: number }) {
+function SearchResultCard({ post }: { post: SitePost }) {
   const task = getPostTaskKey(post) as TaskKey | null
   const href = task ? buildPostUrl(task, post.slug) : `/article/${post.slug}`
   const image = getImage(post)
   const summary = summaryOf(post)
   const taskLabel = SITE_CONFIG.tasks.find((item) => item.key === task)?.label || 'Post'
-  const strong = index % 5 === 0
 
   return (
-    <Link href={href} className={`group block overflow-hidden border-b border-r border-black bg-white ${strong ? 'md:col-span-2' : ''}`}>
+    <Link href={href} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-[16px] border border-black/10 bg-white shadow-[0_14px_36px_rgba(0,0,0,.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_54px_rgba(0,0,0,.14)]">
       {image ? (
-        <div className={`relative overflow-hidden bg-black ${strong ? 'aspect-[16/7]' : 'aspect-[16/10]'}`}>
+        <div className="relative aspect-[4/3] overflow-hidden bg-black sm:aspect-[16/11]">
           <img src={image} alt="" className="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-          <span className="absolute left-4 top-4 bg-[#c92f2f] px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-white">{taskLabel}</span>
+          <span className="absolute left-4 top-4 rounded-md bg-[var(--slot4-accent)] px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-black">{taskLabel}</span>
         </div>
       ) : null}
-      <div className="p-5 sm:p-6">
-        {!image ? <span className="bg-[#c92f2f] px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-white">{taskLabel}</span> : null}
-        <h2 className="editorial-serif mt-4 line-clamp-3 text-2xl font-black leading-[1.03] tracking-[-0.035em] text-black">{post.title}</h2>
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        {!image ? <span className="rounded-md bg-[var(--slot4-accent)] px-3 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-black">{taskLabel}</span> : null}
+        <h2 className="editorial-serif mt-4 line-clamp-3 text-2xl font-black leading-[1.08] tracking-[-0.035em] text-black">{post.title}</h2>
         {summary ? <p className="mt-4 line-clamp-3 text-sm font-semibold leading-7 text-[var(--editable-page-text,#211713)]/65">{summary}</p> : null}
-        <span className="mt-5 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] opacity-60 group-hover:opacity-100">Open result <ArrowRight className="h-4 w-4" /></span>
+        <span className="mt-auto inline-flex items-center gap-2 pt-5 text-xs font-black uppercase tracking-[0.18em] opacity-60 group-hover:opacity-100">Open result <ArrowRight className="h-4 w-4" /></span>
       </div>
     </Link>
   )
@@ -87,11 +86,11 @@ export default async function SearchPage({ searchParams }: { searchParams?: Prom
 
   return (
     <EditableSiteShell>
-      <main className="min-h-screen bg-[#f7f4ef] text-black">
-        <section className="mx-auto max-w-[var(--editable-container)] border-x border-black bg-[#f7f4ef]">
+      <main className="min-h-screen bg-white text-black">
+        <section className="mx-auto max-w-[var(--editable-container)] border-x border-black bg-[#f3f3f3]">
           <div className="grid border-b border-black bg-white md:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <div className="h-full bg-[#c92f2f] p-7 text-white sm:p-10 lg:p-14">
+              <div className="h-full bg-black p-7 text-white sm:p-10 lg:p-14">
                 <p className="text-xs font-black uppercase tracking-[0.28em]">{pagesContent.search.hero.badge}</p>
                 <h1 className="editorial-brand mt-5 text-6xl font-black leading-[0.9] tracking-[-0.055em] sm:text-8xl">{pagesContent.search.hero.title}</h1>
                 <p className="mt-6 max-w-xl text-base font-semibold leading-8 text-white/75">{pagesContent.search.hero.description}</p>
@@ -113,7 +112,7 @@ export default async function SearchPage({ searchParams }: { searchParams?: Prom
                   {enabledTasks.map((item) => <option key={item.key} value={item.key}>{item.label}</option>)}
                 </select>
               </div>
-              <button className="mt-3 inline-flex h-12 w-full items-center justify-center border border-black bg-black px-6 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-[#c92f2f]" type="submit">Search</button>
+              <button className="mt-3 inline-flex h-12 w-full items-center justify-center border border-black bg-black px-6 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:bg-[var(--slot4-accent)] hover:text-black" type="submit">Search</button>
             </form>
           </div>
 
@@ -126,8 +125,8 @@ export default async function SearchPage({ searchParams }: { searchParams?: Prom
           </div>
 
           {results.length ? (
-            <div className="grid border-l border-t border-black md:grid-cols-2 xl:grid-cols-3">
-              {results.map((post, index) => <SearchResultCard key={post.id || post.slug} post={post} index={index} />)}
+            <div className="grid gap-5 p-4 sm:p-6 md:grid-cols-2 lg:p-8 xl:grid-cols-3">
+              {results.map((post) => <SearchResultCard key={post.id || post.slug} post={post} />)}
             </div>
           ) : (
             <div className="m-8 border border-dashed border-black bg-white p-10 text-center">
